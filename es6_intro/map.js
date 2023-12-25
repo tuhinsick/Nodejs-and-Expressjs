@@ -18,6 +18,6 @@ function getDoubles(numbers){
 }
 
 const makeDouble = numbers.map(num => num*2)
-console.log(makeDouble)
+console.log(makeDouble);
 const result = getDoubles(numbers);
 console.log(result[0]);
