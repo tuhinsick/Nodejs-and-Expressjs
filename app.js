@@ -1,41 +1,43 @@
-const people = [
-    {
-        name: 'John',
-        age: 20,
-        position: 'intern',
-    },  
-    {
-        name: 'tuhin',
-        age: 23,
-        position: 'shera',
-    },
-    {
-        name: 'fahim',
-        age: 21,
-        position: 'kajer',
-    },
-];
+const express = require('express');
 
-// people is an array of objects
-//map always returns a new array...
+//express app
+const app = express();
 
-//const ages = people.map((person)=> person.age*2);// ekhn ar taile return statement likhar dorkar nai
 
-// const getAges = (person) => person.age*3;
-// const ages = people.map(getAges);
-// console.log(ages);
+//register view engine
 
-const newPeople = people.map((person)=>{
-    return{
-        firtName:person.name.toUpperCase(),
-        oldAge:person.age+20
-    }
-}
-)
+app.set('view engine','ejs');
 
-console.log(newPeople);
 
-const names = people.map((person)=>`<h2>${person.name}</h2>`);
-const result = document.querySelector('#result');
+//listen for requests
 
-result.innerHTML = names.join(' ');
+
+app.listen(3000);
+
+app.get('/',(req,res) =>{
+    const blogs = [
+        {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum and tell nabiha what i feel for her'},
+        {title: 'Mario finds stars', snippet: 'Dont dare about anything and propose ntahseen'},
+        {title: `Initialize the process`, snippet: `I really like nabiha why cannott i tell her that?`},
+        {title: 'Feelings for Nabiha', snippet: 'I feel pretty jealous when u talk with other bois. I really like uu.. I feel for u.. I dont want to express this feelings and i know u absolutely Dont feel for me. So better we dont text each other.. Good bye and dont text me.'}
+    ];
+    res.render('index',{title: 'Home',blogs});
+});
+
+app.get('/about',(req,res) =>{
+    res.render('about',{title: 'About'});
+});
+
+
+//redirect page
+app.get('/about-us',(req,res) => {
+    res.redirect('/about');
+});
+
+app.get('/blogs/create',(req,res) => {
+    res.render('create',{title: 'Create'});
+});
+
+app.use((req,res)=>{
+    res.status(404).render('404',{title: 'error'});
+});
