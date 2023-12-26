@@ -18,34 +18,29 @@ const fs = require('fs');
 const server = http.createServer((request,response) => {
     console.log(request.url,request.method);
     response.setHeader('Content-Type','text/html');
-    if(request.url === "/blogs"){
-        fs.readFile('.htmls/blog.html',(err,data)=>{
-            if(err){
-                console.log(err);
-            }
-            response.write(data);
-        })
+    let path = './htmls';
+    switch(request.url){
+        case '/' : 
+          path += '/blog.html';
+          break;
+        case '/about':
+            path += '/about.html';
+            break;
+         default : 
+            path += '/error.html';     
+            break;
     }
 
-    else if(request.url === "/about"){
-        fs.readFile('.htmls/about.html',(err,data)=>{
-            if(err){
-                console.log(err);
-            }
+    fs.readFile(path,(err,data)=>{
+        if(err) {
+            console.log("khalid");
+            console.log(err);
+        }
+        console.log("tuhin");
+        response.write(data);
+        response.end();
 
-            response.write(data);
-        })
-    }
-
-    else{
-        fs.readFile('.htmls/error.html',(err,data)=>{
-            if(err){
-                console.log(err);
-            }
-
-            response.write(data);
-        })
-    }
+    })
     response.end();
 })
 
