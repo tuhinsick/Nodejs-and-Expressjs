@@ -1,6 +1,8 @@
 const express = require('express');
 const morgan = require('morgan');
 
+const oracledb = require('oracledb');
+
 //express app
 const app = express();
 
@@ -29,6 +31,45 @@ app.use((req,res,next) => {
 app.use((req,res,next) => {
     console.log("in the next middleware");
     next();
+});
+
+
+app.get('/db',async(req,res) => {
+    let con;
+    try{
+        con = await oracledb.getConnection({
+            user       :"hr",
+            password   : "hr",
+            connectionString : "localhost/orcl"
+        });
+
+        const result = await con.execute(
+            `SELECT MANAGER_ID, COUNT(*)
+             FROM EMPLOYEES 
+             GROUP BY MANAGER_ID
+            `
+        );
+
+        const data = result.rows;
+        //console.log(data);
+        res.render('db',{title:'Database',data});
+    }
+    catch(err){
+        console.log(err);
+    }
+    finally {
+        if (con) {
+            try {
+                // Release the connection back to the connection pool
+                await con.close();
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
+    
+
 });
 
 app.get('/',(req,res) =>{

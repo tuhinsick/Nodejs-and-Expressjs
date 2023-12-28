@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<%- include('./partials/head.ejs') %>
+
+    <body>
+        <%- include('./partials/nav.ejs') %>
+            <div class="db content">
+                <!-- table.ejs -->
+
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Manager Name</th>
+                            <th>Employee Managed</th>
+                            <!-- Add more columns as needed -->
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <% if (data.length> 0) { %>
+                            <% data.forEach(entry=> { %>
+                                <tr>
+                                    <td>
+                                        <%= entry[0] %>
+                                    </td>
+                                    <td>
+                                        <%= entry[1] %>
+                                    </td>
+                                    <!-- Add more cells as needed -->
+                                </tr>
+                                <% }) %>
+                                    <% } else { %>
+                                        <tr>
+                                            <td colspan="2">No data available</td>
+                                            <!-- Adjust colspan based on the number of columns -->
+                                        </tr>
+                                        <% } %>
+                    </tbody>
+                </table>
+                </div>
+                <%- include('./partials/footer.ejs') %>
+    </body>
+
+</html>
