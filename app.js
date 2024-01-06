@@ -74,10 +74,10 @@ app.get('/db',async(req,res) => {
 
 app.get('/',(req,res) =>{
     const blogs = [
-        {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum and tell nabiha what i feel for her'},
-        {title: 'Mario finds stars', snippet: 'Dont dare about anything and propose ntahseen'},
-        {title: `Initialize the process`, snippet: `I really like nabiha why cannott i tell her that?`},
-        {title: 'Feelings for Nabiha', snippet: 'I feel pretty jealous when u talk with other bois. I really like uu.. I feel for u.. I dont want to express this feelings and i know u absolutely Dont feel for me. So better we dont text each other.. Good bye and dont text me.'}
+        {title: 'Yoshi finds eggs', snippet: 'Lorem ipsum and tell her what i feel for her'},
+        {title: 'Mario finds stars', snippet: 'Dont dare about anything and propose her'},
+        {title: `Initialize the process`, snippet: `I really like her why cannott i tell her that?`},
+        {title: 'Feelings for 143', snippet: 'I feel pretty jealous when u talk with other bois. I really like uu.. I feel for u.. I dont want to express this feelings and i know u absolutely Dont feel for me. So better we dont text each other.. Good bye and dont text me.'}
     ];
     res.render('index',{title: 'Home',blogs});
 });
